@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>shopcart — Shop All</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="header">
+    <div class="header-top">
+      <button class="nav-menu-toggle" id="navMenuToggle" aria-label="Open menu">☰</button>
+      <!-- Slide-out Navigation Panel -->
+      <div class="nav-overlay" id="navOverlay"></div>
+      <nav class="nav-panel" id="navPanel">
+        <div class="nav-panel-header">
+          <span class="nav-panel-brand">shopcart</span>
+          <button class="nav-panel-close" id="navPanelClose" aria-label="Close menu">✕</button>
+        </div>
+
+        <div class="nav-panel-section">
+          <div class="nav-panel-label">Shop Categories</div>
+          <a href="home.html" class="nav-panel-item active"><span class="nav-icon">🏠</span> All Products</a>
+          <a href="home.html" class="nav-panel-item" data-cat="Suits &amp; Blazers"><span class="nav-icon">👔</span>
+            Suits &amp; Blazers</a>
+          <a href="home.html" class="nav-panel-item" data-cat="Dress Shirts"><span class="nav-icon">👕</span> Dress
+            Shirts</a>
+          <a href="home.html" class="nav-panel-item" data-cat="Denim &amp; Trousers"><span class="nav-icon">👖</span>
+            Denim &amp; Trousers</a>
+          <a href="home.html" class="nav-panel-item" data-cat="Watches"><span class="nav-icon">⌚</span> Watches</a>
+          <a href="home.html" class="nav-panel-item" data-cat="Footwear"><span class="nav-icon">👞</span> Footwear</a>
+          <a href="home.html" class="nav-panel-item" data-cat="Outerwear"><span class="nav-icon">🧥</span> Outerwear</a>
+          <a href="home.html" class="nav-panel-item" data-cat="Accessories"><span class="nav-icon">🕶️</span>
+            Accessories</a>
+          <a href="home.html" class="nav-panel-item" data-cat="Knitwear"><span class="nav-icon">🧶</span> Knitwear</a>
+          <a href="home.html" class="nav-panel-item" data-cat="Grooming"><span class="nav-icon">✨</span> Grooming</a>
+          <a href="home.html" class="nav-panel-item" data-cat="Bags &amp; Luggage"><span class="nav-icon">🧳</span> Bags
+            &amp; Luggage</a>
+        </div>
+
+        <div class="nav-panel-divider"></div>
+
+        <div class="nav-panel-section">
+          <div class="nav-panel-label">Manage</div>
+          <a href="admin.html" class="nav-panel-item" id="navAdminLink" style="display:none;"><span
+              class="nav-icon">⚙️</span> Admin Dashboard</a>
+          <a href="seller.html" class="nav-panel-item" id="navSellerLink" style="display:none;"><span
+              class="nav-icon">🏪</span> Seller Dashboard</a>
+          <a href="profile.html" class="nav-panel-item" id="navAccountLink"><span class="nav-icon">👤</span> Account</a>
+          <a href="#" class="nav-panel-item" id="navLoginLogout"><span class="nav-icon">🔑</span> <span
+              id="navAccountText">Login</span></a>
+        </div>
+
+        <div class="nav-panel-divider"></div>
+
+        <div class="nav-panel-section">
+          <div class="nav-panel-label">Quick Links</div>
+          <a href="index.html" class="nav-panel-item"><span class="nav-icon">🏪</span> Home</a>
+          <a href="index.html#about" class="nav-panel-item"><span class="nav-icon">ℹ️</span> About</a>
+          <a href="size-chart.html" class="nav-panel-item"><span class="nav-icon">📏</span> Size Chart</a>
+        </div>
+
+        <div class="nav-panel-footer">
+          <p>© 2026 shopcart · Premium Menswear</p>
+        </div>
+      </nav>
+      <a href="index.html" class="logo" id="brand">shopcart</a>
+      <div class="search-section">
+        <input id="search" type="text" placeholder="Search products..." class="search-input" />
+        <button id="searchBtn" class="search-btn" aria-label="Search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="header-actions">
+        <a href="index.html">SHOP ALL</a>
+        <a href="index.html#about">ABOUT</a>
+
+        <div class="account-link" id="cart-toggle">
+          <span class="text">BAG</span>
+          <span class="badge" id="cart-badge">0</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <aside class="shop-sidebar">
+      <div class="sidebar-heading">Have fun!</div>
+      <p class="sidebar-text">
+        These products are curated for you. If you want a closer look, click any card or "Add to Cart" and explore. Shop
+        with confidence—smooth experience, great deals.
+      </p>
+      <div class="sidebar-social">
+        <div>YOUTUBE · shopcart</div>
+        <div>TWITTER · shopcart</div>
+        <div>INSTAGRAM · shopcart</div>
+      </div>
+      <!-- Minimal AI mention -->
+      <p class="sidebar-text"
+        style="margin-top:20px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.7;">AI-powered
+        recommendations</p>
+    </aside>
+
+    <div class="shop-main">
+      <p class="page-title">Shop All</p>
+      <h1 class="page-headline">All Products</h1>
+      <section class="products-section with-sidebar">
+        <div class="products-main">
+          <div class="products-header">
+            <div id="selectedCategory" class="category-title">All Products</div>
+          </div>
+          <div id="productGrid" class="product-grid">
+            <!-- Products rendered by scripts.js -->
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="shop-footer">
+    <div class="shop-footer-grid">
+      <div>
+        <div class="shop-footer-brand">shopcart</div>
+        <div class="shop-footer-copy">© SHOPCART</div>
+        <nav class="shop-footer-links" style="margin-top:16px;">
+          <a href="home.html">SHOP ALL</a>
+          <a href="index.html#about">ABOUT</a>
+          <a href="index.html#about">CONTACT</a>
+          <a href="size-chart.html">SIZE CHART</a>
+          <a href="index.html#about">FAQ</a>
+        </nav>
+      </div>
+      <div class="shop-footer-subscribe">
+        <label>Subscribe for drop updates</label>
+        <input type="email" id="footerEmail" placeholder="Your e-mail" />
+        <div class="shop-footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">YouTube</a>
+        </div>
+      </div>
+    </div>
+    <div class="shop-footer-bottom">
+      <a href="size-chart.html">SIZE CHART</a> · © shopcart
+    </div>
+  </footer>
+
+  <!-- Product Detail Modal – split layout -->
+  <div id="productDetailModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content product-detail">
+      <button class="modal-close" aria-label="Close">✖</button>
+      <div class="detail-container">
+        <div class="detail-image">
+          <div id="detailImagePlaceholder" class="image-placeholder">📷</div>
+          <img id="detailImage" src="" alt="Product" class="hidden">
+        </div>
+        <div class="detail-info">
+          <p class="detail-category" id="detailCategory">SHOP / ALL</p>
+          <h2 id="detailName"></h2>
+          <div class="rating-section">
+            <span id="detailRating" class="rating-stars"></span>
+            <span id="detailReviews" class="reviews-count"></span>
+          </div>
+          <div class="price-row">
+            <span>PRICE</span>
+            <span id="detailPrice" class="detail-price"></span>
+          </div>
+          <span id="detailOrigPrice" class="original-price hidden"></span>
+          <p id="detailDescription"></p>
+          <div class="detail-actions">
+            <button id="addToCartBtn" class="btn-primary">Add to Bag</button>
+          </div>
+          <div class="delivery-info">
+            <p>✓ Free delivery on orders above ₹500</p>
+            <p>✓ 7-day returns</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cartSidebar" class="cart-sidebar hidden">
+    <div class="cart-header">
+      <h2>Bag</h2>
+      <button id="cartClose" class="close-btn" aria-label="Close">✖</button>
+    </div>
+    <div id="cartList" class="cart-list"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotal">₹0</span>
+      </div>
+      <button id="checkoutBtn" class="btn-primary" style="width:100%;">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <audio id="sfxClick" src="assets/sfx/click.mp3" preload="auto"></audio>
+  <audio id="sfxAdd" src="assets/sfx/add.mp3" preload="auto"></audio>
+  <audio id="sfxSuccess" src="assets/sfx/success.mp3" preload="auto"></audio>
+
+  <!-- Payment modal is dynamically injected by scripts.js -->
+
+  <!-- Duplicate menu removed – using single nav-panel above -->
+
+  <script src="scripts.js?v=4"></script>
+  <script src="register.js"></script>
+
+  <script>
+    // ── Nav Panel Logic (runs after scripts.js) ──
+    (function () {
+      const toggle = document.getElementById('navMenuToggle');
+      const panel = document.getElementById('navPanel');
+      const overlay = document.getElementById('navOverlay');
+      const closeBtn = document.getElementById('navPanelClose');
+
+      function openNav() {
+        panel.classList.add('open');
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeNav() {
+        panel.classList.remove('open');
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      if (toggle) toggle.addEventListener('click', openNav);
+      if (closeBtn) closeBtn.addEventListener('click', closeNav);
+      if (overlay) overlay.addEventListener('click', closeNav);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+
+      // Login/Logout state (JWT-based)
+      const navLoginBtn = document.getElementById('navLoginLogout');
+      const navAccountText = document.getElementById('navAccountText');
+      const navAdminLink = document.getElementById('navAdminLink');
+      const navSellerLink = document.getElementById('navSellerLink');
+      let currentUser = null;
+
+      try {
+        const token = localStorage.getItem('shopHubToken');
+        const userStr = localStorage.getItem('shopHubUser');
+        if (token && userStr) currentUser = JSON.parse(userStr);
+      } catch (e) { }
+
+      if (currentUser && navAccountText) {
+        const name = currentUser.username || currentUser.email || 'User';
+        navAccountText.textContent = name + ' (Logout)';
+        // Show role-based links
+        if (navAdminLink) navAdminLink.style.display = (currentUser.role === 'admin') ? 'flex' : 'none';
+        if (navSellerLink) navSellerLink.style.display = (currentUser.role === 'seller' || currentUser.role === 'admin') ? 'flex' : 'none';
+      } else {
+        if (navAdminLink) navAdminLink.style.display = 'none';
+        if (navSellerLink) navSellerLink.style.display = 'none';
+      }
+
+      if (navLoginBtn) {
+        navLoginBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (currentUser) {
+            if (confirm('Click OK to logout')) {
+              localStorage.removeItem('shopHubLoggedIn');
+              localStorage.removeItem('shopHubToken');
+              localStorage.removeItem('shopHubUser');
+              window.location.reload();
+            }
+          } else {
+            window.location.href = 'login.html';
+          }
+        });
+      }
+
+      // ── Category filtering ──
+      const allNavItems = document.querySelectorAll('.nav-panel-item');
+      const catItems = document.querySelectorAll('.nav-panel-item[data-cat]');
+      const allProductsItem = document.querySelector('.nav-panel-item.active'); // "All Products" link
+
+      function setActiveItem(el) {
+        allNavItems.forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+      }
+
+      // "All Products" link
+      if (allProductsItem) {
+        allProductsItem.addEventListener('click', function (e) {
+          e.preventDefault();
+          setActiveItem(this);
+          // Reset to show all (homepage mode)
+          window.categoryPageFilter = null;
+          closeNav();
+          // Update heading
+          const headline = document.querySelector('.page-headline');
+          if (headline) headline.textContent = 'All Products';
+          const pageTitle = document.querySelector('.page-title');
+          if (pageTitle) pageTitle.textContent = 'Shop All';
+          // Reload products
+          if (window.loadProducts) window.loadProducts();
+        });
+      }
+
+      // Category links
+      catItems.forEach(item => {
+        item.addEventListener('click', function (e) {
+          e.preventDefault();
+          setActiveItem(this);
+          const cat = this.getAttribute('data-cat');
+          // Decode HTML entities (e.g. &amp; -> &)
+          const decoded = new DOMParser().parseFromString(cat, 'text/html').body.textContent;
+
+          // Set filter and reload products
+          window.categoryPageFilter = decoded;
+          closeNav();
+
+          // Update page heading
+          const headline = document.querySelector('.page-headline');
+          if (headline) headline.textContent = decoded;
+          const pageTitle = document.querySelector('.page-title');
+          if (pageTitle) pageTitle.textContent = 'Filtered by Category';
+
+          // Call loadProducts from scripts.js
+          if (window.loadProducts) {
+            window.loadProducts();
+          }
+        });
+      });
+    })();
+  </script>
+  <div id="printInvoice" class="hidden"></div>
+  <!-- ShopKeeper AI Chatbot -->
+  <script src="shopkeeper.js"></script>
+</body>
+
+</html>

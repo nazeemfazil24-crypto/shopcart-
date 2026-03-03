@@ -1,0 +1,642 @@
+{
+  "stores": [
+    {
+      "store": "Suits & Blazers",
+      "name": "Suits & Blazers",
+      "category": "suits-blazers",
+      "image": "",
+      "products": [
+        {
+          "id": "p1",
+          "name": "Premium Black Blazer",
+          "price": 45999,
+          "image": "uploads/black_blazer.png",
+          "description": "Tailored slim-fit blazer in midnight black wool blend",
+          "rating": 4.9,
+          "reviews": 342
+        },
+        {
+          "id": "p2",
+          "name": "Navy Blue Suit Set",
+          "price": 64999,
+          "image": "uploads/navy_blue_suit.png",
+          "description": "Two-piece suit with peak lapel, Italian fabric",
+          "rating": 4.8,
+          "reviews": 276
+        },
+        {
+          "id": "p3",
+          "name": "Charcoal Wool Blazer",
+          "price": 49999,
+          "image": "uploads/charcoal_wool_blazer.png",
+          "description": "Single-breasted wool blazer, modern cut",
+          "rating": 4.7,
+          "reviews": 198
+        },
+        {
+          "id": "p4",
+          "name": "Double-Breasted Suit",
+          "price": 72999,
+          "image": "uploads/double_breasted_suit.png",
+          "description": "Classic double-breasted design with gold buttons",
+          "rating": 4.9,
+          "reviews": 164
+        },
+        {
+          "id": "p5",
+          "name": "Velvet Dinner Jacket",
+          "price": 58999,
+          "image": "uploads/velvet_dinner_jacket.png",
+          "description": "Luxury velvet tuxedo jacket for black-tie events",
+          "rating": 4.8,
+          "reviews": 223
+        },
+        {
+          "id": "p6",
+          "name": "Linen Summer Blazer",
+          "price": 34999,
+          "image": "uploads/linen_summer_blazer.png",
+          "description": "Breathable linen blazer for warm-weather elegance",
+          "rating": 4.6,
+          "reviews": 145
+        }
+      ]
+    },
+    {
+      "store": "Dress Shirts",
+      "name": "Dress Shirts",
+      "category": "dress-shirts",
+      "image": "",
+      "products": [
+        {
+          "id": "p7",
+          "name": "Silk Dress Shirt White",
+          "price": 14999,
+          "image": "uploads/white_silk_shirt.png",
+          "description": "Pure silk French-cuff dress shirt, crisp white",
+          "rating": 4.7,
+          "reviews": 198
+        },
+        {
+          "id": "p8",
+          "name": "Egyptian Cotton Oxford",
+          "price": 12999,
+          "image": "uploads/cotton_oxford_shirt.png",
+          "description": "Premium Egyptian cotton button-down oxford",
+          "rating": 4.8,
+          "reviews": 312
+        },
+        {
+          "id": "p9",
+          "name": "Slim Fit Black Shirt",
+          "price": 11499,
+          "image": "uploads/black_dress_shirt.png",
+          "description": "Stretch cotton slim-fit shirt in jet black",
+          "rating": 4.6,
+          "reviews": 256
+        },
+        {
+          "id": "p10",
+          "name": "French Blue Chambray",
+          "price": 13499,
+          "image": "uploads/blue_chambray_shirt.png",
+          "description": "Soft chambray weave shirt in French blue",
+          "rating": 4.7,
+          "reviews": 189
+        },
+        {
+          "id": "p11",
+          "name": "Pinstripe Dress Shirt",
+          "price": 12499,
+          "image": "uploads/pinstripe_shirt.png",
+          "description": "Fine pinstripe pattern on premium cotton",
+          "rating": 4.5,
+          "reviews": 167
+        },
+        {
+          "id": "p12",
+          "name": "Spread Collar Lilac",
+          "price": 11999,
+          "image": "uploads/lilac_spread_shirt.png",
+          "description": "Italian-collar shirt in subtle lilac shade",
+          "rating": 4.6,
+          "reviews": 143
+        }
+      ]
+    },
+    {
+      "store": "Denim & Trousers",
+      "name": "Denim & Trousers",
+      "category": "denim-trousers",
+      "image": "",
+      "products": [
+        {
+          "id": "p13",
+          "name": "Designer Denim Jeans",
+          "price": 24999,
+          "image": "uploads/designer_denim_jeans.png",
+          "description": "Japanese selvedge denim, slim tapered fit",
+          "rating": 4.8,
+          "reviews": 287
+        },
+        {
+          "id": "p14",
+          "name": "Tailored Wool Trousers",
+          "price": 21999,
+          "image": "uploads/wool_trousers.png",
+          "description": "Flat-front wool trousers with crease detail",
+          "rating": 4.7,
+          "reviews": 234
+        },
+        {
+          "id": "p15",
+          "name": "Stretch Chinos Khaki",
+          "price": 13999,
+          "image": "uploads/khaki_chinos.png",
+          "description": "Comfortable stretch chinos in classic khaki",
+          "rating": 4.6,
+          "reviews": 321
+        },
+        {
+          "id": "p16",
+          "name": "Black Slim Trousers",
+          "price": 18999,
+          "image": "uploads/black_slim_trousers.png",
+          "description": "Modern slim-cut trousers, wrinkle-resistant",
+          "rating": 4.8,
+          "reviews": 198
+        },
+        {
+          "id": "p17",
+          "name": "Raw Indigo Denim",
+          "price": 29999,
+          "image": "uploads/raw_indigo_denim.png",
+          "description": "Premium raw indigo Japanese denim, straight leg",
+          "rating": 4.9,
+          "reviews": 156
+        },
+        {
+          "id": "p18",
+          "name": "Pleated Dress Pants",
+          "price": 19999,
+          "image": "uploads/pleated_dress_pants.png",
+          "description": "Classic pleated front with cuffed hem",
+          "rating": 4.5,
+          "reviews": 178
+        }
+      ]
+    },
+    {
+      "store": "Watches",
+      "name": "Watches",
+      "category": "watches",
+      "image": "",
+      "products": [
+        {
+          "id": "p19",
+          "name": "Luxury Chronograph Watch",
+          "price": 89999,
+          "image": "uploads/luxury_chronograph_watch.png",
+          "description": "Swiss-movement chronograph with sapphire crystal",
+          "rating": 4.9,
+          "reviews": 521
+        },
+        {
+          "id": "p20",
+          "name": "Minimalist Dress Watch",
+          "price": 54999,
+          "image": "uploads/minimalist_dress_watch.png",
+          "description": "Slim profile, Italian leather strap, rose gold",
+          "rating": 4.8,
+          "reviews": 345
+        },
+        {
+          "id": "p21",
+          "name": "Diver's Automatic Watch",
+          "price": 109999,
+          "image": "uploads/divers_automatic_watch.png",
+          "description": "300m water-resistant automatic diver with ceramic bezel",
+          "rating": 4.9,
+          "reviews": 412
+        },
+        {
+          "id": "p22",
+          "name": "Classic Pilot Watch",
+          "price": 69999,
+          "image": "uploads/classic_pilot_watch.png",
+          "description": "Aviation-inspired with luminous hands and numerals",
+          "rating": 4.7,
+          "reviews": 267
+        },
+        {
+          "id": "p23",
+          "name": "Skeleton Tourbillon",
+          "price": 189999,
+          "image": "uploads/skeleton_tourbillon.png",
+          "description": "Open-heart tourbillon movement, exhibition caseback",
+          "rating": 4.9,
+          "reviews": 189
+        },
+        {
+          "id": "p24",
+          "name": "Sport Chronometer",
+          "price": 64999,
+          "image": "uploads/sport_chronometer.jpg",
+          "description": "COSC-certified chronometer with tachymeter scale",
+          "rating": 4.8,
+          "reviews": 298
+        }
+      ]
+    },
+    {
+      "store": "Footwear",
+      "name": "Footwear",
+      "category": "footwear",
+      "image": "",
+      "products": [
+        {
+          "id": "p25",
+          "name": "Italian Leather Loafers",
+          "price": 34999,
+          "image": "uploads/italian_leather_loafers.jpg",
+          "description": "Hand-stitched penny loafers in burnished leather",
+          "rating": 4.9,
+          "reviews": 264
+        },
+        {
+          "id": "p26",
+          "name": "Oxford Dress Shoes",
+          "price": 44999,
+          "image": "uploads/oxford_dress_shoes.jpg",
+          "description": "Cap-toe Oxford in full-grain calfskin leather",
+          "rating": 4.8,
+          "reviews": 312
+        },
+        {
+          "id": "p27",
+          "name": "Chelsea Boots Black",
+          "price": 39999,
+          "image": "uploads/51lpcYzZcdL._AC_UY1100_.jpg",
+          "description": "Sleek Chelsea boots with elastic gore panel",
+          "rating": 4.7,
+          "reviews": 198
+        },
+        {
+          "id": "p28",
+          "name": "Suede Desert Boots",
+          "price": 27999,
+          "image": "uploads/suede_desert_boots.jpg",
+          "description": "Classic desert boots in premium tan suede",
+          "rating": 4.6,
+          "reviews": 234
+        },
+        {
+          "id": "p29",
+          "name": "Monk Strap Shoes",
+          "price": 42999,
+          "image": "uploads/monk.avif",
+          "description": "Double monk-strap in polished mahogany leather",
+          "rating": 4.8,
+          "reviews": 187
+        },
+        {
+          "id": "p30",
+          "name": "Premium White Sneakers",
+          "price": 29999,
+          "image": "uploads/white_sneakers.jpg",
+          "description": "Minimalist leather sneakers with rubber sole",
+          "rating": 4.7,
+          "reviews": 456
+        }
+      ]
+    },
+    {
+      "store": "Outerwear",
+      "name": "Outerwear",
+      "category": "outerwear",
+      "image": "",
+      "products": [
+        {
+          "id": "p31",
+          "name": "Cashmere Overcoat",
+          "price": 99999,
+          "image": "",
+          "description": "Full-length cashmere-wool blend overcoat in camel",
+          "rating": 4.9,
+          "reviews": 178
+        },
+        {
+          "id": "p32",
+          "name": "Leather Bomber Jacket",
+          "price": 74999,
+          "image": "uploads/leather_bomber_jacket.jpg",
+          "description": "Lambskin leather bomber with ribbed cuffs",
+          "rating": 4.8,
+          "reviews": 256
+        },
+        {
+          "id": "p33",
+          "name": "Quilted Field Jacket",
+          "price": 42999,
+          "image": "uploads/quilted_field_jacket.jpg",
+          "description": "Diamond-quilted jacket with corduroy collar",
+          "rating": 4.7,
+          "reviews": 312
+        },
+        {
+          "id": "p34",
+          "name": "Wool Peacoat Navy",
+          "price": 54999,
+          "image": "uploads/wool_peacoat_navy.jpg",
+          "description": "Classic double-breasted peacoat in navy wool",
+          "rating": 4.8,
+          "reviews": 189
+        },
+        {
+          "id": "p35",
+          "name": "Trench Coat Beige",
+          "price": 47999,
+          "image": "",
+          "description": "Water-repellent trench with belt and epaulettes",
+          "rating": 4.6,
+          "reviews": 234
+        },
+        {
+          "id": "p36",
+          "name": "Shearling Aviator Jacket",
+          "price": 84999,
+          "image": "",
+          "description": "Genuine shearling-lined aviator in dark brown",
+          "rating": 4.9,
+          "reviews": 145
+        }
+      ]
+    },
+    {
+      "store": "Accessories",
+      "name": "Accessories",
+      "category": "accessories",
+      "image": "",
+      "products": [
+        {
+          "id": "p37",
+          "name": "Designer Sunglasses UV",
+          "price": 29999,
+          "image": "uploads/designer_sunglasses.jpg",
+          "description": "Polarized acetate frames with UV400 protection",
+          "rating": 4.8,
+          "reviews": 156
+        },
+        {
+          "id": "p38",
+          "name": "Italian Leather Belt",
+          "price": 14999,
+          "image": "uploads/italian_leather_belt.jpg",
+          "description": "Full-grain leather belt with brushed silver buckle",
+          "rating": 4.7,
+          "reviews": 423
+        },
+        {
+          "id": "p39",
+          "name": "Silk Pocket Square Set",
+          "price": 9999,
+          "image": "",
+          "description": "Set of 4 premium silk pocket squares, curated colours",
+          "rating": 4.6,
+          "reviews": 187
+        },
+        {
+          "id": "p40",
+          "name": "Cashmere Scarf Grey",
+          "price": 19999,
+          "image": "",
+          "description": "100% cashmere scarf in heather grey",
+          "rating": 4.8,
+          "reviews": 234
+        },
+        {
+          "id": "p41",
+          "name": "Leather Card Holder",
+          "price": 11999,
+          "image": "uploads/leather_card_holder.jpg",
+          "description": "Slim RFID-blocking cardholder in Italian leather",
+          "rating": 4.7,
+          "reviews": 345
+        },
+        {
+          "id": "p42",
+          "name": "Gold Cufflinks Set",
+          "price": 24999,
+          "image": "uploads/gold.webp",
+          "description": "18k gold-plated cufflinks with onyx inlay",
+          "rating": 4.9,
+          "reviews": 167
+        },
+        {
+          "id": "p43",
+          "name": "Leather Briefcase",
+          "price": 54999,
+          "image": "uploads/leather_briefcase.jpg",
+          "description": "Full-grain leather briefcase with laptop compartment",
+          "rating": 4.8,
+          "reviews": 198
+        },
+        {
+          "id": "p44",
+          "name": "Premium Tie Collection",
+          "price": 12999,
+          "image": "uploads/3_fold_tie_grande.webp",
+          "description": "Hand-woven silk tie in classic patterns",
+          "rating": 4.6,
+          "reviews": 278
+        }
+      ]
+    },
+    {
+      "store": "Knitwear",
+      "name": "Knitwear",
+      "category": "knitwear",
+      "image": "",
+      "products": [
+        {
+          "id": "p45",
+          "name": "Merino Wool V-Neck",
+          "price": 17999,
+          "image": "",
+          "description": "Extra-fine merino wool sweater, lightweight",
+          "rating": 4.7,
+          "reviews": 234
+        },
+        {
+          "id": "p46",
+          "name": "Cashmere Crewneck",
+          "price": 32999,
+          "image": "",
+          "description": "Pure cashmere crewneck in charcoal grey",
+          "rating": 4.9,
+          "reviews": 189
+        },
+        {
+          "id": "p47",
+          "name": "Cable-Knit Turtleneck",
+          "price": 22999,
+          "image": "",
+          "description": "Chunky cable-knit in cream wool blend",
+          "rating": 4.6,
+          "reviews": 167
+        },
+        {
+          "id": "p48",
+          "name": "Cardigan Zip-Front",
+          "price": 24999,
+          "image": "",
+          "description": "Full-zip cardigan in brushed cotton",
+          "rating": 4.7,
+          "reviews": 145
+        },
+        {
+          "id": "p49",
+          "name": "Ribbed Mock Neck",
+          "price": 15999,
+          "image": "uploads/ribbed_mock_neck.jpg",
+          "description": "Modern ribbed mock-neck pullover in navy",
+          "rating": 4.5,
+          "reviews": 198
+        },
+        {
+          "id": "p50",
+          "name": "Lambswool Sweater Vest",
+          "price": 13999,
+          "image": "uploads/lambswool_sweater_vest.jpg",
+          "description": "Classic V-neck vest in lambswool, layering piece",
+          "rating": 4.6,
+          "reviews": 123
+        }
+      ]
+    },
+    {
+      "store": "Grooming",
+      "name": "Grooming",
+      "category": "grooming",
+      "image": "",
+      "products": [
+        {
+          "id": "p51",
+          "name": "Luxury Cologne Set",
+          "price": 27999,
+          "image": "uploads/luxury_cologne_set.jpg",
+          "description": "Trio of artisan fragrances, woody & citrus notes",
+          "rating": 4.8,
+          "reviews": 412
+        },
+        {
+          "id": "p52",
+          "name": "Premium Shaving Kit",
+          "price": 15999,
+          "image": "uploads/premium_shaving_kit.jpg",
+          "description": "Safety razor, badger brush & sandalwood cream",
+          "rating": 4.7,
+          "reviews": 287
+        },
+        {
+          "id": "p53",
+          "name": "Beard Oil Collection",
+          "price": 8999,
+          "image": "uploads/beard_oil_collection.jpg",
+          "description": "Organic beard oils in cedarwood & bergamot",
+          "rating": 4.6,
+          "reviews": 345
+        },
+        {
+          "id": "p54",
+          "name": "Face Serum Anti-Aging",
+          "price": 12999,
+          "image": "uploads/retinolSerum2.webp",
+          "description": "Retinol & vitamin C serum for men",
+          "rating": 4.5,
+          "reviews": 198
+        },
+        {
+          "id": "p55",
+          "name": "Hair Pomade Matte",
+          "price": 4999,
+          "image": "",
+          "description": "Strong hold matte finish pomade, natural",
+          "rating": 4.7,
+          "reviews": 456
+        },
+        {
+          "id": "p56",
+          "name": "Travel Grooming Set",
+          "price": 21999,
+          "image": "uploads/travel_grooming_set.jpg",
+          "description": "Leather case with full grooming essentials",
+          "rating": 4.8,
+          "reviews": 167
+        }
+      ]
+    },
+    {
+      "store": "Bags & Luggage",
+      "name": "Bags & Luggage",
+      "category": "bags-luggage",
+      "image": "",
+      "products": [
+        {
+          "id": "p57",
+          "name": "Leather Weekender Bag",
+          "price": 49999,
+          "image": "uploads/leather_weekender_bag.jpg",
+          "description": "Full-grain leather duffle for weekend getaways",
+          "rating": 4.9,
+          "reviews": 234
+        },
+        {
+          "id": "p58",
+          "name": "Canvas Backpack",
+          "price": 24999,
+          "image": "uploads/canvas_backpack.jpg",
+          "description": "Waxed canvas backpack with leather trim",
+          "rating": 4.7,
+          "reviews": 312
+        },
+        {
+          "id": "p59",
+          "name": "Hardshell Carry-On",
+          "price": 37999,
+          "image": "uploads/hardshell_carryon.jpg",
+          "description": "Lightweight polycarbonate carry-on with spinner wheels",
+          "rating": 4.8,
+          "reviews": 278
+        },
+        {
+          "id": "p60",
+          "name": "Messenger Bag Leather",
+          "price": 32999,
+          "image": "uploads/messenger_bag.jpg",
+          "description": "Crossbody messenger in distressed leather",
+          "rating": 4.6,
+          "reviews": 189
+        },
+        {
+          "id": "p61",
+          "name": "Garment Travel Bag",
+          "price": 27999,
+          "image": "uploads/garment_travel_bag.jpg",
+          "description": "Folding garment bag for suit travel",
+          "rating": 4.7,
+          "reviews": 145
+        },
+        {
+          "id": "p62",
+          "name": "Laptop Sleeve Premium",
+          "price": 11999,
+          "image": "uploads/laptop_sleeve.jpg",
+          "description": "Padded leather laptop sleeve fits 13-15 inch",
+          "rating": 4.5,
+          "reviews": 367
+        }
+      ]
+    }
+  ]
+}

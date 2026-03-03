@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign In / Login</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav aria-label="breadcrumb" style="margin: 16px 0;">
+    <ol style="list-style:none;display:flex;gap:8px;padding:0;">
+      <li><a href="index.html">Home</a></li>
+      <li>&gt;</li>
+      <li>Sign In / Login</li>
+    </ol>
+  </nav>
+  <main style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;">
+    <h2>Sign In / Login</h2>
+    <form id="signinForm" style="display:flex;flex-direction:column;gap:12px;min-width:260px;">
+      <input id="username" placeholder="Username" required style="padding:10px;border-radius:8px;border:1px solid #ccc;">
+      <input id="password" type="password" placeholder="Password" required style="padding:10px;border-radius:8px;border:1px solid #ccc;">
+      <button type="submit" class="primary">Login</button>
+      <p id="msg" style="color:#d32f2f;"></p>
+    </form>
+  </main>
+  <script src="signin.js"></script>
+</body>
+</html>

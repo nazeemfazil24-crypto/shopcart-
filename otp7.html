@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Login with OTP Authentication</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 450px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #333;
+      font-size: 28px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+      font-family: inherit;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    input::placeholder {
+      color: #999;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-bottom: 10px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .success-message {
+      background: #d4edda;
+      color: #155724;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      text-align: center;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .error-message {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      text-align: center;
+      display: none;
+      font-size: 14px;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .timer {
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    .timer.expiring {
+      color: #d9534f;
+      font-weight: bold;
+    }
+
+    .back-button {
+      background: #f0f0f0;
+      color: #333;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    .back-button:hover {
+      background: #e0e0e0;
+    }
+
+    .info-text {
+      text-align: center;
+      font-size: 13px;
+      color: #999;
+      margin-top: 15px;
+    }
+
+    .user-info {
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      text-align: center;
+      display: none;
+    }
+
+    .user-info.show {
+      display: block;
+    }
+
+    .logout-btn {
+      background: #dc3545;
+    }
+
+    .logout-btn:hover {
+      box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      input,
+      button {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="loader.css" />
+</head>
+
+<body>
+  <div id="globalLoader" class="loader-overlay loader-hidden" style="display:none;">
+    <div class="loader">
+      <div class="inner one"></div>
+      <div class="inner two"></div>
+      <div class="inner three"></div>
+    </div>
+  </div>
+  <script src="loader.js"></script>
+  <div class="container">
+    <h1>🔐 Secure Login</h1>
+    <p class="subtitle">Enter your credentials to get started</p>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage"></div>
+    <div class="error-message" id="errorMessage"></div>
+
+    <!-- Section 1: Login Input -->
+    <div class="form-section active" id="loginSection">
+      <div class="form-group">
+        <label for="username">Username or Email</label>
+        <input type="email" id="username" placeholder="Enter your username or email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required />
+      </div>
+
+      <button onclick="initiateLogin()">Login with OTP</button>
+      <p class="info-text">We'll send a one-time password to verify your identity</p>
+    </div>
+
+    <!-- Section 2: OTP Sending Confirmation -->
+    <div class="form-section" id="otpSendingSection">
+      <div class="user-info show">
+        <p>Verification email will be sent to:</p>
+        <p><strong id="displayEmail" style="color: #667eea;"></strong></p>
+      </div>
+
+      <button onclick="sendOTP()" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">Send OTP to
+        Email</button>
+      <button class="back-button" onclick="backToLogin()">Back to Login</button>
+    </div>
+
+    <!-- Section 3: OTP Verification -->
+    <div class="form-section" id="otpVerifySection">
+      <div class="user-info show">
+        <p>OTP sent to <strong id="verifyEmail"></strong></p>
+      </div>
+
+      <div class="form-group">
+        <label for="userOtp">Enter 6-Digit OTP</label>
+        <input type="text" id="userOtp" placeholder="000000" maxlength="6" required />
+      </div>
+
+      <button onclick="verifyOTP()" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">Verify
+        OTP</button>
+      <button class="back-button" onclick="backToLogin()">Back to Login</button>
+
+      <div class="timer" id="timerDisplay"></div>
+    </div>
+
+    <!-- Section 4: Login Success -->
+    <div class="form-section" id="successSection">
+      <div class="success-message show">
+        <h3 style="margin-bottom: 10px;">✅ Login Successful!</h3>
+        <p id="welcomeMessage"></p>
+      </div>
+
+      <div class="user-info show">
+        <p>Logged in as:</p>
+        <p><strong id="loggedInUser" style="color: #667eea; font-size: 16px;"></strong></p>
+      </div>
+
+      <button onclick="redirectToDashboard()"
+        style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">Continue to Dashboard</button>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    let currentUser = null;
+    let loginAttempt = null;
+
+    // Check if user is already logged in
+    function checkLoginStatus() {
+      const storedUser = localStorage.getItem('loggedInUser');
+      if (storedUser) {
+        currentUser = JSON.parse(storedUser);
+        showSection('successSection');
+        document.getElementById('loggedInUser').textContent = currentUser.username;
+        document.getElementById('welcomeMessage').textContent = `Welcome back, ${currentUser.username}!`;
+      }
+    }
+
+    window.onload = checkLoginStatus;
+
+    function initiateLogin() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      clearErrors();
+
+      if (!username) { showError('Please enter your username or email'); return; }
+      if (!password) { showError('Please enter your password'); return; }
+      if (!isValidEmail(username)) { showError('Please enter a valid email address'); return; }
+      if (password.length < 6) { showError('Password must be at least 6 characters'); return; }
+
+      loginAttempt = { username, password };
+      document.getElementById('displayEmail').textContent = username;
+      showSection('otpSendingSection');
+    }
+
+    async function sendOTP() {
+      if (!loginAttempt) {
+        showError('Login session expired. Please try again.');
+        showSection('loginSection');
+        return;
+      }
+
+      const btn = event.target;
+      const originalText = btn.textContent;
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      showLoader();
+      clearErrors();
+
+      try {
+        const resp = await fetch('/api/send-login-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: loginAttempt.username, password: loginAttempt.password })
+        });
+        const data = await resp.json();
+
+        if (resp.ok && data.success) {
+          document.getElementById('verifyEmail').textContent = loginAttempt.username;
+          // Show OTP directly on page
+          if (data.otp_code) {
+            showSuccess('Your OTP code is: ' + data.otp_code);
+          } else {
+            showSuccess('OTP sent! Check your email.');
+          }
+          startOTPTimer();
+          showSection('otpVerifySection');
+        } else {
+          showError(data.error || 'Failed to send OTP. Please try again.');
+        }
+      } catch (err) {
+        showError('Network error. Is the server running?');
+      } finally {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        hideLoader();
+      }
+    }
+
+    async function verifyOTP() {
+      const otpInput = document.getElementById('userOtp').value.trim();
+      clearErrors();
+
+      if (!otpInput) { showError('Please enter the OTP'); return; }
+      if (otpInput.length !== 6 || isNaN(otpInput)) { showError('OTP must be exactly 6 digits'); return; }
+
+      try {
+        const resp = await fetch('/api/verify-login-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: loginAttempt.username, otp: otpInput })
+        });
+        const data = await resp.json();
+
+        if (resp.ok && data.success) {
+          // Save login session
+          currentUser = {
+            username: data.user ? data.user.username : loginAttempt.username,
+            email: data.user ? data.user.email : loginAttempt.username,
+            loginTime: new Date().toLocaleString(),
+            authenticated: true
+          };
+          localStorage.setItem('loggedInUser', JSON.stringify(currentUser));
+          if (data.token) {
+            localStorage.setItem('shopHubToken', data.token);
+            localStorage.setItem('shopHubUser', JSON.stringify(data.user));
+          }
+
+          document.getElementById('loggedInUser').textContent = currentUser.username;
+          document.getElementById('welcomeMessage').textContent = `Welcome, ${currentUser.username}! You are now logged in.`;
+          showSection('successSection');
+          showSuccess('Login successful! Redirecting...');
+          setTimeout(redirectToDashboard, 2000);
+        } else {
+          showError(data.error || 'Invalid OTP. Please try again.');
+        }
+      } catch (err) {
+        showError('Network error. Please try again.');
+      }
+    }
+
+    function startOTPTimer() {
+      let timeLeft = 600;
+      function updateTimer() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        const timerDisplay = document.getElementById('timerDisplay');
+        if (timeLeft <= 0) {
+          timerDisplay.innerHTML = '<span style="color: #d9534f;">OTP Expired - Request a new one</span>';
+          clearInterval(timerInterval);
+          return;
+        }
+        timerDisplay.textContent = `OTP expires in: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+        if (timeLeft <= 60) timerDisplay.classList.add('expiring');
+        timeLeft--;
+      }
+      updateTimer();
+      const timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function backToLogin() {
+      clearErrors();
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
+      document.getElementById('userOtp').value = '';
+      loginAttempt = null;
+      showSection('loginSection');
+    }
+
+    function redirectToDashboard() {
+      if (currentUser && currentUser.authenticated) {
+        window.location.href = 'index.html';
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('loggedInUser');
+      localStorage.removeItem('shopHubToken');
+      localStorage.removeItem('shopHubUser');
+      currentUser = null;
+      loginAttempt = null;
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
+      document.getElementById('userOtp').value = '';
+      clearErrors();
+      showSuccess('Logged out successfully!');
+      setTimeout(() => { clearErrors(); showSection('loginSection'); }, 1500);
+    }
+
+    function showSection(sectionId) {
+      document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+    }
+
+    function showError(message) {
+      const el = document.getElementById('errorMessage');
+      el.textContent = message;
+      el.classList.add('show');
+    }
+
+    function showSuccess(message) {
+      const el = document.getElementById('successMessage');
+      el.textContent = message;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 8000);
+    }
+
+    function clearErrors() {
+      document.getElementById('errorMessage').classList.remove('show');
+      document.getElementById('successMessage').classList.remove('show');
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('username').addEventListener('keypress', e => { if (e.key === 'Enter') initiateLogin(); });
+      document.getElementById('password').addEventListener('keypress', e => { if (e.key === 'Enter') initiateLogin(); });
+      document.getElementById('userOtp').addEventListener('keypress', e => { if (e.key === 'Enter') verifyOTP(); });
+    });
+  </script>
+</body>
+
+</html>

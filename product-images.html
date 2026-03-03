@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Image Manager — ShopHub</title>
+    <style>
+        :root {
+            --green-dark: #1C262B;
+            --green-main: #2D503C;
+            --white: #EFEFFA;
+            --border: rgba(255, 255, 255, 0.25);
+            --accent: #a0ffa0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--green-dark);
+            color: var(--white);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .top-bar {
+            background: var(--green-main);
+            padding: 16px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-bar h1 {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .top-bar a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        .top-bar a:hover {
+            opacity: 1;
+        }
+
+        .save-bar {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            position: sticky;
+            top: 55px;
+            z-index: 99;
+        }
+
+        .save-bar .stats {
+            font-size: 13px;
+            opacity: 0.7;
+        }
+
+        .save-btn {
+            padding: 10px 28px;
+            background: var(--accent);
+            color: #1a1a2e;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(160, 255, 160, 0.3);
+        }
+
+        .save-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Category section */
+        .category-section {
+            margin: 20px 24px;
+            background: var(--green-main);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .category-header {
+            padding: 14px 20px;
+            background: rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .category-header:hover {
+            background: rgba(0, 0, 0, 0.25);
+        }
+
+        .category-header h2 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .category-header .count {
+            font-size: 12px;
+            opacity: 0.5;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 3px 10px;
+            border-radius: 10px;
+        }
+
+        .category-body {
+            padding: 0;
+        }
+
+        .category-body.collapsed {
+            display: none;
+        }
+
+        /* Product row */
+        .product-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background 0.2s;
+        }
+
+        .product-row:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .product-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+
+        .product-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-thumb .no-img {
+            font-size: 24px;
+            opacity: 0.3;
+        }
+
+        .product-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .product-info .pname {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .product-info .pprice {
+            font-size: 12px;
+            opacity: 0.5;
+        }
+
+        .image-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .image-controls input[type="text"] {
+            width: 260px;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--white);
+            font-size: 13px;
+            font-family: inherit;
+        }
+
+        .image-controls input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .image-controls input[type="text"]::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-small {
+            padding: 7px 14px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background: transparent;
+            color: var(--white);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .btn-small:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-small.applied {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .upload-label {
+            padding: 7px 14px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background: transparent;
+            color: var(--white);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .upload-label:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .upload-label input {
+            display: none;
+        }
+
+        .has-image {
+            border-color: var(--accent) !important;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 14px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            z-index: 9999;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .toast.success {
+            background: #27ae60;
+        }
+
+        .toast.error {
+            background: #c0392b;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(120%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(120%);
+                opacity: 0;
+            }
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            opacity: 0.5;
+            font-size: 15px;
+        }
+
+        @media (max-width: 700px) {
+            .product-row {
+                flex-wrap: wrap;
+            }
+
+            .image-controls {
+                width: 100%;
+            }
+
+            .image-controls input[type="text"] {
+                width: 100%;
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <h1>🖼️ Product Image Manager</h1>
+        <a href="index.html">← Back to ShopHub</a>
+    </div>
+
+    <div class="save-bar">
+        <span class="stats" id="statsText">Loading...</span>
+        <button class="save-btn" id="saveBtn" onclick="saveAll()" disabled>💾 SAVE ALL CHANGES</button>
+    </div>
+
+    <div id="container">
+        <div class="loading">Loading products...</div>
+    </div>
+
+    <script>
+        let menuData = null;
+        let changeCount = 0;
+        let serverAvailable = false;
+
+        /* ── Load menu: server → menu.json file → localStorage ── */
+        async function loadMenu() {
+            // Try 1: Server API
+            try {
+                const resp = await fetch('/admin/menu');
+                if (resp.ok) {
+                    menuData = await resp.json();
+                    serverAvailable = true;
+                    console.log('[ImageMgr] Loaded from server');
+                    renderAll();
+                    return;
+                }
+            } catch (e) {
+                console.log('[ImageMgr] Server not available');
+            }
+
+            // Try 2: Direct menu.json file (works from file:// in some browsers)
+            try {
+                const resp = await fetch('menu.json');
+                if (resp.ok) {
+                    menuData = await resp.json();
+                    console.log('[ImageMgr] Loaded from menu.json directly');
+                    // Also check localStorage for overrides
+                    applyLocalStorageOverrides();
+                    renderAll();
+                    return;
+                }
+            } catch (e) {
+                console.log('[ImageMgr] menu.json fetch failed');
+            }
+
+            // Try 3: localStorage (saved from previous sessions)
+            try {
+                const stored = localStorage.getItem('shoclub_menu');
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    // Convert embedded format (items) to manager format (products)
+                    menuData = convertToManagerFormat(parsed);
+                    console.log('[ImageMgr] Loaded from localStorage');
+                    renderAll();
+                    return;
+                }
+            } catch (e) {
+                console.log('[ImageMgr] localStorage load failed');
+            }
+
+            document.getElementById('container').innerHTML =
+                '<div class="loading">❌ Cannot load products. Try opening with the server (python app.py) first, or place menu.json in the same folder.</div>';
+        }
+
+        /* Convert embedded format (name/items) to manager format (store/products) */
+        function convertToManagerFormat(data) {
+            if (!data || !data.stores) return data;
+            return {
+                stores: data.stores.map(s => ({
+                    store: s.store || s.name || 'Store',
+                    category: s.category || '',
+                    image: s.image || '',
+                    products: (s.products || s.items || []).map(p => ({
+                        name: p.name,
+                        price: p.price,
+                        description: p.description || '',
+                        image: p.image || '',
+                        rating: p.rating || 4,
+                        reviews: p.reviews || 0
+                    }))
+                }))
+            };
+        }
+
+        /* Apply any image overrides from localStorage */
+        function applyLocalStorageOverrides() {
+            try {
+                const stored = localStorage.getItem('shoclub_product_images');
+                if (stored) {
+                    const overrides = JSON.parse(stored);
+                    menuData.stores.forEach((store, si) => {
+                        (store.products || []).forEach((product, pi) => {
+                            const key = `${si}_${pi}`;
+                            if (overrides[key]) {
+                                product.image = overrides[key];
+                            }
+                        });
+                    });
+                    console.log('[ImageMgr] Applied localStorage image overrides');
+                }
+            } catch (e) { /* ignore */ }
+        }
+
+        /* ── Render all categories and products ── */
+        function renderAll() {
+            const container = document.getElementById('container');
+            if (!menuData || !menuData.stores) {
+                container.innerHTML = '<div class="loading">No products found in menu.json</div>';
+                return;
+            }
+
+            let totalProducts = 0;
+            let withImages = 0;
+            let html = '';
+
+            // Show mode indicator
+            html += `<div style="padding:8px 24px;font-size:12px;opacity:0.6;">
+                Mode: ${serverAvailable ? '🟢 Server connected — saves to menu.json' : '🟡 Offline — saves to browser (localStorage)'}
+            </div>`;
+
+            menuData.stores.forEach((store, si) => {
+                const products = store.products || [];
+                totalProducts += products.length;
+                const storeImgCount = products.filter(p => p.image).length;
+                withImages += storeImgCount;
+
+                html += `<div class="category-section">
+          <div class="category-header" onclick="toggleCategory(${si})">
+            <h2>${store.store} <span class="count">${storeImgCount}/${products.length} images</span></h2>
+            <span id="arrow${si}">▼</span>
+          </div>
+          <div class="category-body" id="cat${si}">`;
+
+                products.forEach((product, pi) => {
+                    const hasImg = product.image ? true : false;
+                    const thumbHtml = hasImg
+                        ? `<img src="${product.image}" alt="${product.name}" onerror="this.parentElement.innerHTML='<div class=no-img>📷</div>'">`
+                        : '<div class="no-img">📷</div>';
+
+                    html += `<div class="product-row" id="row-${si}-${pi}">
+            <div class="product-thumb ${hasImg ? 'has-image' : ''}" id="thumb-${si}-${pi}">
+              ${thumbHtml}
+            </div>
+            <div class="product-info">
+              <div class="pname">${product.name}</div>
+              <div class="pprice">$${product.price}</div>
+            </div>
+            <div class="image-controls">
+              <input type="text" id="url-${si}-${pi}" placeholder="Paste image URL..."
+                     value="${product.image || ''}"
+                     onchange="applyUrl(${si},${pi})" onkeyup="if(event.key==='Enter')applyUrl(${si},${pi})">
+              <button class="btn-small ${hasImg ? 'applied' : ''}" onclick="applyUrl(${si},${pi})">Apply</button>
+              <label class="upload-label">
+                📁 Upload
+                <input type="file" accept="image/*" onchange="uploadFile(this,${si},${pi})">
+              </label>
+              ${hasImg ? `<button class="btn-small" onclick="clearImg(${si},${pi})" title="Remove image">✕</button>` : ''}
+            </div>
+          </div>`;
+                });
+
+                html += '</div></div>';
+            });
+
+            container.innerHTML = html;
+            updateStats(totalProducts, withImages);
+        }
+
+        /* ── Apply URL ── */
+        function applyUrl(si, pi) {
+            const url = document.getElementById(`url-${si}-${pi}`).value.trim();
+            menuData.stores[si].products[pi].image = url;
+            changeCount++;
+            updateThumb(si, pi, url);
+            updateStats();
+            document.getElementById('saveBtn').disabled = false;
+        }
+
+        /* ── Upload file ── */
+        async function uploadFile(input, si, pi) {
+            const file = input.files[0];
+            if (!file) return;
+
+            // Try server upload first
+            if (serverAvailable) {
+                const formData = new FormData();
+                formData.append('file', file);
+                try {
+                    const resp = await fetch('/admin/upload_image', { method: 'POST', body: formData });
+                    const data = await resp.json();
+                    if (data.success) {
+                        const imgPath = data.path;
+                        menuData.stores[si].products[pi].image = imgPath;
+                        document.getElementById(`url-${si}-${pi}`).value = imgPath;
+                        changeCount++;
+                        updateThumb(si, pi, imgPath);
+                        updateStats();
+                        document.getElementById('saveBtn').disabled = false;
+                        toast('Image uploaded to server!', 'success');
+                        input.value = '';
+                        return;
+                    }
+                } catch (e) { /* fall through to base64 */ }
+            }
+
+            // Offline mode: convert to base64 data URL
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const dataUrl = e.target.result;
+                menuData.stores[si].products[pi].image = dataUrl;
+                document.getElementById(`url-${si}-${pi}`).value = '(uploaded image)';
+                changeCount++;
+                updateThumb(si, pi, dataUrl);
+                updateStats();
+                document.getElementById('saveBtn').disabled = false;
+                toast('Image loaded (saved in browser)', 'success');
+            };
+            reader.readAsDataURL(file);
+            input.value = '';
+        }
+
+        /* ── Clear image ── */
+        function clearImg(si, pi) {
+            menuData.stores[si].products[pi].image = '';
+            document.getElementById(`url-${si}-${pi}`).value = '';
+            changeCount++;
+            updateThumb(si, pi, '');
+            updateStats();
+            document.getElementById('saveBtn').disabled = false;
+        }
+
+        /* ── Update thumbnail ── */
+        function updateThumb(si, pi, url) {
+            const thumb = document.getElementById(`thumb-${si}-${pi}`);
+            if (url) {
+                thumb.classList.add('has-image');
+                thumb.innerHTML = `<img src="${url}" alt="Product" onerror="this.parentElement.innerHTML='<div class=no-img>⚠️</div>'">`;
+            } else {
+                thumb.classList.remove('has-image');
+                thumb.innerHTML = '<div class="no-img">📷</div>';
+            }
+        }
+
+        /* ── Toggle category ── */
+        function toggleCategory(si) {
+            const body = document.getElementById(`cat${si}`);
+            const arrow = document.getElementById(`arrow${si}`);
+            body.classList.toggle('collapsed');
+            arrow.textContent = body.classList.contains('collapsed') ? '▶' : '▼';
+        }
+
+        /* ── Update stats ── */
+        function updateStats() {
+            if (!menuData) return;
+            let total = 0, withImg = 0;
+            menuData.stores.forEach(s => {
+                (s.products || []).forEach(p => {
+                    total++;
+                    if (p.image) withImg++;
+                });
+            });
+            document.getElementById('statsText').textContent =
+                `${withImg}/${total} products have images · ${changeCount} unsaved changes`;
+        }
+
+        /* ── Save: server if available, otherwise localStorage ── */
+        async function saveAll() {
+            const btn = document.getElementById('saveBtn');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+
+            // Always save to localStorage for offline access
+            saveToLocalStorage();
+
+            if (serverAvailable) {
+                // Try server save
+                try {
+                    const resp = await fetch('/admin/menu', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(menuData)
+                    });
+                    const data = await resp.json();
+                    if (data.success) {
+                        changeCount = 0;
+                        updateStats();
+                        toast('Saved to server + browser!', 'success');
+                        renderAll();
+                        btn.textContent = '💾 SAVE ALL CHANGES';
+                        return;
+                    }
+                } catch (err) { /* fall through */ }
+            }
+
+            // Offline save (localStorage only)
+            changeCount = 0;
+            updateStats();
+            toast('Saved to browser! Changes will show when you open the shop.', 'success');
+            renderAll();
+            btn.textContent = '💾 SAVE ALL CHANGES';
+        }
+
+        /* Save menu data to localStorage for offline use by scripts.js */
+        function saveToLocalStorage() {
+            try {
+                // Save in the format scripts.js expects (name/items)
+                const embedded = {
+                    stores: menuData.stores.map((s, i) => ({
+                        id: 'store_' + (i + 1),
+                        name: s.store || s.name || 'Store',
+                        category: s.category || '',
+                        items: (s.products || s.items || []).map((p, j) => ({
+                            id: 'p' + (i * 10 + j + 1),
+                            name: p.name,
+                            price: p.price,
+                            description: p.description || '',
+                            image: p.image || '',
+                            rating: p.rating || 4,
+                            reviews: p.reviews || 0
+                        }))
+                    }))
+                };
+                localStorage.setItem('shoclub_menu', JSON.stringify(embedded));
+                // Force version refresh so scripts.js picks up the new data
+                localStorage.setItem('shoclub_menu_version', 'premium_mens_v4_offline');
+                console.log('[ImageMgr] Saved to localStorage');
+            } catch (e) {
+                console.error('[ImageMgr] localStorage save failed:', e);
+            }
+        }
+
+        /* ── Toast notification ── */
+        function toast(text, type) {
+            const old = document.getElementById('_t');
+            if (old) old.remove();
+            const d = document.createElement('div');
+            d.id = '_t';
+            d.className = 'toast ' + type;
+            d.textContent = text;
+            document.body.appendChild(d);
+            setTimeout(() => {
+                d.style.animation = 'slideOut 0.3s ease-in forwards';
+                setTimeout(() => d.remove(), 300);
+            }, 3000);
+        }
+
+        // Start
+        loadMenu();
+    </script>
+</body>
+
+</html>

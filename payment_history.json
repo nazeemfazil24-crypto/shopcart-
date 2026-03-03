@@ -1,0 +1,24 @@
+[
+	{
+		"id": "pmt-20260218-120000",
+		"user": "demo",
+		"amount": 99.00,
+		"date": "2026-02-18T12:00:00Z",
+		"status": "completed",
+		"method": "qr",
+		"meta": {
+			"qrUrl": "https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=payment%3Apmt-20260218-120000%3Bamount%3A99.00%3Bmethod%3Aqr&chld=L|1"
+		}
+	},
+	{
+		"id": "pmt-20260218-120002",
+		"user": "demo-file",
+		"amount": 150.00,
+		"date": "2026-02-18T12:05:00Z",
+		"status": "completed",
+		"method": "qr",
+		"meta": {
+			"qrUrl": "qr.png"
+		}
+	}
+]

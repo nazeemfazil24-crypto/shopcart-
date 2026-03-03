@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard — ShopHub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0f1a;
+            --bg-card: #0f1726;
+            --bg-input: rgba(255, 255, 255, 0.04);
+            --green: #63c882;
+            --green-dim: rgba(99, 200, 130, 0.1);
+            --green-glow: rgba(99, 200, 130, 0.25);
+            --border: rgba(255, 255, 255, 0.06);
+            --text: #f0f0f0;
+            --text-muted: rgba(255, 255, 255, 0.4);
+            --danger: #ff6b6b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text);
+        }
+
+        /* ── Top Bar ── */
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 32px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .topbar-brand {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        .topbar-brand span {
+            color: var(--green);
+        }
+
+        .topbar-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .topbar-user {
+            font-size: 13px;
+            color: var(--text-muted);
+            padding: 6px 12px;
+            background: var(--bg-input);
+            border-radius: 8px;
+        }
+
+        .btn-outline {
+            padding: 8px 18px;
+            background: transparent;
+            color: var(--green);
+            border: 1.5px solid rgba(99, 200, 130, 0.3);
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .btn-outline:hover {
+            background: var(--green-dim);
+            border-color: var(--green);
+        }
+
+        .btn-danger-outline {
+            color: var(--danger);
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-danger-outline:hover {
+            background: rgba(255, 107, 107, 0.08);
+            border-color: var(--danger);
+        }
+
+        /* ── Main ── */
+        .main {
+            max-width: 1000px;
+            margin: 32px auto;
+            padding: 0 24px;
+        }
+
+        /* ── Upgrade Banner ── */
+        .upgrade-banner {
+            background: linear-gradient(135deg, rgba(99, 200, 130, 0.08) 0%, rgba(45, 122, 74, 0.1) 100%);
+            border: 1.5px solid rgba(99, 200, 130, 0.15);
+            border-radius: 16px;
+            padding: 36px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .upgrade-banner h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .upgrade-banner p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .upgrade-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .upgrade-form .field-full {
+            grid-column: 1 / -1;
+        }
+
+        .upgrade-form input,
+        .upgrade-form textarea {
+            width: 100%;
+            padding: 12px 14px;
+            background: var(--bg-input);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .upgrade-form input:focus,
+        .upgrade-form textarea:focus {
+            outline: none;
+            border-color: var(--green);
+        }
+
+        .upgrade-form input::placeholder,
+        .upgrade-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .upgrade-form textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .upgrade-form label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+        }
+
+        .btn-upgrade {
+            grid-column: 1 / -1;
+            padding: 14px;
+            background: linear-gradient(135deg, #2d7a4a 0%, #63c882 100%);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .btn-upgrade:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--green-glow);
+        }
+
+        .btn-upgrade:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ── Stats ── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            text-align: center;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(99, 200, 130, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--green);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 6px;
+            font-weight: 600;
+        }
+
+        /* ── Section Card ── */
+        .section-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .section-card h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 12px 14px;
+            background: var(--bg-input);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--green);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #2d7a4a 0%, #63c882 100%);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            margin-top: 4px;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--green-glow);
+        }
+
+        .btn-add:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ── Products Table ── */
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .products-table th {
+            text-align: left;
+            padding: 12px 14px;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .products-table td {
+            padding: 14px;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            vertical-align: middle;
+        }
+
+        .products-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .product-thumb {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .btn-del {
+            padding: 6px 14px;
+            background: rgba(255, 59, 48, 0.08);
+            color: var(--danger);
+            border: 1px solid rgba(255, 59, 48, 0.2);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-del:hover {
+            background: rgba(255, 59, 48, 0.15);
+        }
+
+        .no-products {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        .msg {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            text-align: center;
+            font-size: 14px;
+            display: none;
+        }
+
+        .msg.error {
+            background: rgba(255, 59, 48, 0.1);
+            color: #ff6b6b;
+            display: block;
+        }
+
+        .msg.success {
+            background: rgba(52, 211, 153, 0.1);
+            color: #34d399;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+
+            .form-row,
+            .upgrade-form {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                padding: 12px 16px;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .main {
+                padding: 0 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topbar">
+        <div class="topbar-brand">shop<span>cart</span> seller</div>
+        <div class="topbar-actions">
+            <span class="topbar-user" id="sellerName"></span>
+            <a href="index.html" class="btn-outline">← Shop</a>
+            <button class="btn-outline btn-danger-outline" onclick="handleLogout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="main">
+        <!-- Upgrade Banner (shown to non-sellers) -->
+        <div id="upgradeSection" class="upgrade-banner" style="display:none;">
+            <h2>🏪 Become a Seller</h2>
+            <p>Upgrade your account to start selling products on ShopHub.<br>Fill in your shop details below to get
+                started.</p>
+            <div id="upgradeMsg" class="msg"></div>
+            <form class="upgrade-form" id="upgradeForm" onsubmit="handleUpgrade(event)">
+                <div>
+                    <label>Shop Name *</label>
+                    <input id="shopName" type="text" placeholder="My Premium Store" required>
+                </div>
+                <div>
+                    <label>Contact Phone *</label>
+                    <input id="shopPhone" type="text" placeholder="+1 234 567 8900" required>
+                </div>
+                <div class="field-full">
+                    <label>Shop Description</label>
+                    <textarea id="shopDesc" placeholder="Tell buyers what makes your shop special..."></textarea>
+                </div>
+                <button class="btn-upgrade" type="submit" id="upgradeBtn">Upgrade to Seller</button>
+            </form>
+        </div>
+
+        <!-- Seller Dashboard (shown to sellers) -->
+        <div id="sellerDashboard" style="display:none;">
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalProducts">0</div>
+                    <div class="stat-label">My Products</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalValue">₹0</div>
+                    <div class="stat-label">Catalog Value</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="avgPrice">₹0</div>
+                    <div class="stat-label">Avg. Price</div>
+                </div>
+            </div>
+
+            <!-- Add Product -->
+            <div class="section-card">
+                <h2>➕ Add New Product</h2>
+                <div id="addMsg" class="msg"></div>
+                <form id="addProductForm" onsubmit="handleAddProduct(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Product Name *</label>
+                            <input id="prodName" type="text" placeholder="Premium Leather Wallet" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Price (₹ INR) *</label>
+                            <input id="prodPrice" type="number" step="0.01" min="0" placeholder="99.99" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="prodCategory">
+                                <option value="Accessories">Accessories</option>
+                                <option value="Suits & Blazers">Suits & Blazers</option>
+                                <option value="Dress Shirts">Dress Shirts</option>
+                                <option value="Denim & Trousers">Denim & Trousers</option>
+                                <option value="Watches">Watches</option>
+                                <option value="Footwear">Footwear</option>
+                                <option value="Outerwear">Outerwear</option>
+                                <option value="Knitwear">Knitwear</option>
+                                <option value="Grooming">Grooming</option>
+                                <option value="Bags & Luggage">Bags & Luggage</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Image URL</label>
+                            <input id="prodImage" type="text" placeholder="https://...">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label>Description</label>
+                            <textarea id="prodDesc" placeholder="Describe your product..."></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-add" id="addBtn">Add Product</button>
+                </form>
+            </div>
+
+            <!-- Product List -->
+            <div class="section-card">
+                <h2>📦 My Products</h2>
+                <div id="productsContainer">
+                    <div class="no-products">Loading...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let authToken = null;
+        let currentUser = null;
+
+        function checkAuth() {
+            authToken = localStorage.getItem('shopHubToken');
+            const userStr = localStorage.getItem('shopHubUser');
+            if (!authToken || !userStr) {
+                alert('Please log in first.');
+                window.location.href = 'login.html';
+                return false;
+            }
+            currentUser = JSON.parse(userStr);
+            document.getElementById('sellerName').textContent = currentUser.username || currentUser.email;
+
+            if (currentUser.role === 'seller' || currentUser.role === 'admin') {
+                document.getElementById('upgradeSection').style.display = 'none';
+                document.getElementById('sellerDashboard').style.display = 'block';
+            } else {
+                document.getElementById('upgradeSection').style.display = 'block';
+                document.getElementById('sellerDashboard').style.display = 'none';
+            }
+            return true;
+        }
+
+        function authHeaders() {
+            return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken };
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('shopHubToken');
+            localStorage.removeItem('shopHubUser');
+            localStorage.removeItem('shopHubLoggedIn');
+            window.location.href = 'login.html';
+        }
+
+        function showMsg(id, message, type) {
+            const el = document.getElementById(id);
+            el.innerHTML = message;
+            el.className = 'msg ' + type;
+        }
+
+        // ── Upgrade to seller ──
+        async function handleUpgrade(e) {
+            e.preventDefault();
+            const btn = document.getElementById('upgradeBtn');
+            const data = {
+                shop_name: document.getElementById('shopName').value.trim(),
+                phone: document.getElementById('shopPhone').value.trim(),
+                description: document.getElementById('shopDesc').value.trim()
+            };
+
+            btn.disabled = true;
+            btn.textContent = 'Upgrading...';
+            showMsg('upgradeMsg', '', '');
+
+            try {
+                const resp = await fetch('/api/upgrade-to-seller', {
+                    method: 'POST',
+                    headers: authHeaders(),
+                    body: JSON.stringify(data)
+                });
+                const result = await resp.json();
+
+                if (resp.ok && result.success) {
+                    // Update stored auth
+                    localStorage.setItem('shopHubToken', result.token);
+                    localStorage.setItem('shopHubUser', JSON.stringify(result.user));
+                    localStorage.setItem('shopHubLoggedIn', JSON.stringify({
+                        email: result.user.email,
+                        username: result.user.username,
+                        role: result.user.role,
+                        loginTime: new Date().toLocaleString()
+                    }));
+                    showMsg('upgradeMsg', '🎉 ' + result.message + ' Reloading...', 'success');
+                    setTimeout(() => window.location.reload(), 1200);
+                } else {
+                    showMsg('upgradeMsg', result.error || 'Upgrade failed', 'error');
+                }
+            } catch (err) {
+                showMsg('upgradeMsg', 'Network error', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Upgrade to Seller';
+            }
+        }
+
+        // ── Load products ──
+        async function loadProducts() {
+            try {
+                const resp = await fetch('/api/seller/products', { headers: authHeaders() });
+                if (resp.status === 401 || resp.status === 403) { handleLogout(); return; }
+                const data = await resp.json();
+                const products = data.products || [];
+
+                document.getElementById('totalProducts').textContent = products.length;
+                const totalVal = products.reduce((s, p) => s + (p.price || 0), 0);
+                document.getElementById('totalValue').textContent = '₹' + Math.round(totalVal).toLocaleString('en-IN');
+                document.getElementById('avgPrice').textContent = products.length ? ('₹' + Math.round(totalVal / products.length).toLocaleString('en-IN')) : '₹0';
+                renderProducts(products);
+            } catch (err) { console.error(err); }
+        }
+
+        function renderProducts(products) {
+            const c = document.getElementById('productsContainer');
+            if (!products.length) { c.innerHTML = '<div class="no-products">No products yet. Add your first one above! 🎉</div>'; return; }
+            c.innerHTML = `<table class="products-table"><thead><tr><th></th><th>Name</th><th>Category</th><th>Price</th><th></th></tr></thead><tbody>${products.map(p => `
+        <tr>
+          <td>${p.image ? `<img src="${p.image}" class="product-thumb" alt="">` : '<div class="product-thumb" style="display:flex;align-items:center;justify-content:center;font-size:18px;">📦</div>'}</td>
+          <td><strong>${esc(p.name)}</strong></td>
+          <td style="color:var(--text-muted)">${esc(p.category_name || p.category || '')}</td>
+          <td>₹${p.price.toLocaleString('en-IN')}</td>
+          <td><button class="btn-del" onclick="deleteProduct(${p.id})">Delete</button></td>
+        </tr>`).join('')}</tbody></table>`;
+        }
+
+        function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]); }
+
+        // ── Add product ──
+        async function handleAddProduct(e) {
+            e.preventDefault();
+            const btn = document.getElementById('addBtn');
+            const cat = document.getElementById('prodCategory').value;
+            const body = {
+                name: document.getElementById('prodName').value.trim(),
+                price: parseFloat(document.getElementById('prodPrice').value),
+                description: document.getElementById('prodDesc').value.trim(),
+                category_name: cat,
+                category: cat.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-'),
+                image: document.getElementById('prodImage').value.trim()
+            };
+
+            if (!body.name || isNaN(body.price)) { showMsg('addMsg', 'Name and price required', 'error'); return; }
+            btn.disabled = true;
+            btn.textContent = 'Adding...';
+
+            try {
+                const resp = await fetch('/api/seller/products', { method: 'POST', headers: authHeaders(), body: JSON.stringify(body) });
+                const data = await resp.json();
+                if (resp.ok && data.success) {
+                    showMsg('addMsg', '✅ Product added!', 'success');
+                    document.getElementById('addProductForm').reset();
+                    loadProducts();
+                    setTimeout(() => showMsg('addMsg', '', ''), 3000);
+                } else { showMsg('addMsg', data.error || 'Failed', 'error'); }
+            } catch (err) { showMsg('addMsg', 'Network error', 'error'); }
+            finally { btn.disabled = false; btn.textContent = 'Add Product'; }
+        }
+
+        // ── Delete ──
+        async function deleteProduct(id) {
+            if (!confirm('Delete this product?')) return;
+            try {
+                const resp = await fetch('/api/seller/products/' + id, { method: 'DELETE', headers: authHeaders() });
+                if (resp.ok) loadProducts();
+                else { const d = await resp.json(); alert(d.error || 'Failed'); }
+            } catch (err) { alert('Network error'); }
+        }
+
+        // Init
+        if (checkAuth()) {
+            if (currentUser.role === 'seller' || currentUser.role === 'admin') loadProducts();
+        }
+    </script>
+</body>
+
+</html>

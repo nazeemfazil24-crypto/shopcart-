@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account — shopcart</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="profile.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Top Header Bar (same as home.html) -->
+  <header class="header">
+    <div class="header-top">
+      <a href="home.html" class="logo" id="brand">shopcart</a>
+      <div class="header-actions">
+        <a href="home.html">SHOP ALL</a>
+        <a href="index.html#about">ABOUT</a>
+        <div class="account-link" id="cart-toggle">
+          <span class="text">BAG</span>
+          <span class="badge" id="cart-badge">0</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Account Page Layout -->
+  <div class="account-page">
+
+    <!-- Left Sidebar -->
+    <aside class="account-sidebar" id="accountSidebar">
+      <div class="account-user-card" id="userCard">
+        <div class="account-avatar-wrap">
+          <img src="" alt="Avatar" class="account-avatar" id="accountAvatar"
+            onerror="this.src='https://ui-avatars.com/api/?name=User&background=d4af37&color=101522&rounded=true&size=120'">
+          <label for="avatarInput" class="avatar-edit-badge" title="Change photo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"></path>
+            </svg>
+          </label>
+          <input type="file" id="avatarInput" accept="image/*" style="display:none">
+        </div>
+        <div class="account-user-name" id="accountUserName">User</div>
+        <div class="account-user-email" id="accountUserEmail">user@email.com</div>
+        <div class="account-role-badge" id="accountRoleBadge">Buyer</div>
+      </div>
+
+      <nav class="account-nav">
+        <button class="account-nav-item active" data-section="profile">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span>My Profile</span>
+        </button>
+        <button class="account-nav-item" data-section="orders">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+            <line x1="1" y1="10" x2="23" y2="10" />
+          </svg>
+          <span>My Orders</span>
+        </button>
+        <button class="account-nav-item" data-section="addproduct" id="navAddProduct">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="16" />
+            <line x1="8" y1="12" x2="16" y2="12" />
+          </svg>
+          <span>Add Product</span>
+        </button>
+        <button class="account-nav-item" data-section="wishlist">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+          </svg>
+          <span>Wishlist</span>
+        </button>
+        <button class="account-nav-item" data-section="addresses">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          <span>Addresses</span>
+        </button>
+        <button class="account-nav-item" data-section="settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+          </svg>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <button class="account-logout-btn" id="logoutBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+          <polyline points="16 17 21 12 16 7" />
+          <line x1="21" y1="12" x2="9" y2="12" />
+        </svg>
+        <span>Logout</span>
+      </button>
+    </aside>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="account-mobile-toggle" id="mobileMenuToggle">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+      <span>Menu</span>
+    </button>
+
+    <!-- Right Content Area -->
+    <main class="account-content">
+
+      <!-- ═══ My Profile ═══ -->
+      <section class="account-section active" id="section-profile">
+        <div class="section-header">
+          <h1 class="section-title">My Profile</h1>
+          <p class="section-subtitle">Manage your personal information</p>
+        </div>
+        <div class="profile-form-card animate-in">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="profileName">Full Name</label>
+              <input type="text" id="profileName" placeholder="Your full name">
+            </div>
+            <div class="form-group">
+              <label for="profileUsername">Username</label>
+              <input type="text" id="profileUsername" placeholder="Your username">
+            </div>
+            <div class="form-group">
+              <label for="profileEmail">Email Address</label>
+              <input type="email" id="profileEmail" placeholder="your@email.com" readonly>
+            </div>
+            <div class="form-group">
+              <label for="profilePhone">Phone Number</label>
+              <input type="tel" id="profilePhone" placeholder="+1 (555) 000-0000">
+            </div>
+            <div class="form-group full-width">
+              <label for="profileBio">Bio</label>
+              <textarea id="profileBio" rows="3" placeholder="Tell us a little about yourself..."></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn-save" id="saveProfileBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Save Changes
+            </button>
+            <button class="btn-cancel" id="cancelProfileBtn">Cancel</button>
+          </div>
+        </div>
+
+        <div class="profile-form-card animate-in" style="animation-delay: 0.1s">
+          <h3 class="card-subtitle">Change Password</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="currentPass">Current Password</label>
+              <input type="password" id="currentPass" placeholder="••••••••">
+            </div>
+            <div class="form-group">
+              <label for="newPass">New Password</label>
+              <input type="password" id="newPass" placeholder="••••••••">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn-save" id="changePassBtn">Update Password</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ My Orders ═══ -->
+      <section class="account-section" id="section-orders">
+        <div class="section-header">
+          <h1 class="section-title">My Orders</h1>
+          <p class="section-subtitle">Track and manage your purchases</p>
+        </div>
+        <div class="orders-stats animate-in">
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(34,166,153,0.15);color:#22a699;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="statCompleted">0</span>
+              <span class="stat-label">Completed</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(212,175,55,0.15);color:#d4af37;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="statPending">0</span>
+              <span class="stat-label">Pending</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(220,38,38,0.15);color:#dc2626;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="15" y1="9" x2="9" y2="15" />
+                <line x1="9" y1="9" x2="15" y2="15" />
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="statCancelled">0</span>
+              <span class="stat-label">Cancelled</span>
+            </div>
+          </div>
+        </div>
+        <div class="orders-list animate-in" id="ordersList" style="animation-delay: 0.1s">
+          <div class="empty-state">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              opacity="0.3">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+              <line x1="1" y1="10" x2="23" y2="10" />
+            </svg>
+            <p>No orders yet</p>
+            <a href="home.html" class="btn-browse">Browse Products</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Add Product (Seller/Admin Only) ═══ -->
+      <section class="account-section" id="section-addproduct">
+        <div class="section-header">
+          <h1 class="section-title">Add Product</h1>
+          <p class="section-subtitle">List a new product for sale</p>
+        </div>
+        <div class="profile-form-card animate-in">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="productName">Product Name</label>
+              <input type="text" id="productName" placeholder="e.g. Classic Oxford Shirt">
+            </div>
+            <div class="form-group">
+              <label for="productPrice">Price (₹)</label>
+              <input type="number" id="productPrice" step="1" min="0" placeholder="999">
+            </div>
+            <div class="form-group">
+              <label for="productCategory">Category</label>
+              <select id="productCategory">
+                <option value="">Select category</option>
+                <option value="mens-fashion">Men's Fashion</option>
+                <option value="womens-fashion">Women's Fashion</option>
+                <option value="electronics">Electronics</option>
+                <option value="footwear">Footwear</option>
+                <option value="accessories">Accessories</option>
+                <option value="home-kitchen">Home & Kitchen</option>
+                <option value="beauty-care">Beauty Care</option>
+                <option value="sports-fitness">Sports & Fitness</option>
+                <option value="books-media">Books & Media</option>
+                <option value="grocery-food">Grocery & Food</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="productImage">Image URL</label>
+              <input type="url" id="productImage" placeholder="https://...">
+            </div>
+            <div class="form-group full-width">
+              <label for="productDesc">Description</label>
+              <textarea id="productDesc" rows="4" placeholder="Describe your product..."></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn-save" id="addProductBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              Add Product
+            </button>
+            <button class="btn-cancel" id="clearProductBtn">Clear</button>
+          </div>
+        </div>
+
+        <!-- My Products List -->
+        <div class="profile-form-card animate-in" style="animation-delay: 0.1s">
+          <h3 class="card-subtitle">My Products</h3>
+          <div class="my-products-list" id="myProductsList">
+            <div class="empty-state">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                opacity="0.3">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="16" />
+                <line x1="8" y1="12" x2="16" y2="12" />
+              </svg>
+              <p>No products listed yet</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Wishlist ═══ -->
+      <section class="account-section" id="section-wishlist">
+        <div class="section-header">
+          <h1 class="section-title">Wishlist</h1>
+          <p class="section-subtitle">Items you've saved for later</p>
+        </div>
+        <div class="wishlist-grid animate-in" id="wishlistGrid">
+          <div class="empty-state">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              opacity="0.3">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+            </svg>
+            <p>Your wishlist is empty</p>
+            <a href="home.html" class="btn-browse">Discover Products</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Addresses ═══ -->
+      <section class="account-section" id="section-addresses">
+        <div class="section-header">
+          <h1 class="section-title">My Addresses</h1>
+          <p class="section-subtitle">Manage your delivery addresses</p>
+        </div>
+        <div class="profile-form-card animate-in">
+          <h3 class="card-subtitle">Add New Address</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="addrLabel">Address Label</label>
+              <input type="text" id="addrLabel" placeholder="e.g. Home, Office">
+            </div>
+            <div class="form-group">
+              <label for="addrPhone">Phone</label>
+              <input type="tel" id="addrPhone" placeholder="+91 98765 43210">
+            </div>
+            <div class="form-group full-width">
+              <label for="addrStreet">House/Flat No., Street, Locality</label>
+              <input type="text" id="addrStreet" placeholder="12/3, MG Road, Near City Mall">
+            </div>
+            <div class="form-group">
+              <label for="addrCity">City / District</label>
+              <input type="text" id="addrCity" placeholder="Chennai">
+            </div>
+            <div class="form-group">
+              <label for="addrState">State</label>
+              <select id="addrState">
+                <option value="">Select State</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="Assam">Assam</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Goa">Goa</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Odisha">Odisha</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Tripura">Tripura</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Uttarakhand">Uttarakhand</option>
+                <option value="West Bengal">West Bengal</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="addrZip">PIN Code</label>
+              <input type="text" id="addrZip" placeholder="600001" maxlength="6" pattern="[0-9]{6}">
+            </div>
+            <div class="form-group">
+              <label for="addrCountry">Country</label>
+              <input type="text" id="addrCountry" value="India" readonly>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn-save" id="saveAddressBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Save Address
+            </button>
+          </div>
+        </div>
+        <div class="addresses-list animate-in" id="addressesList" style="animation-delay: 0.1s">
+        </div>
+      </section>
+
+      <!-- ═══ Settings ═══ -->
+      <section class="account-section" id="section-settings">
+        <div class="section-header">
+          <h1 class="section-title">Settings</h1>
+          <p class="section-subtitle">Manage your preferences</p>
+        </div>
+
+        <div class="profile-form-card animate-in">
+          <h3 class="card-subtitle">Notifications</h3>
+          <div class="settings-options">
+            <label class="settings-toggle">
+              <span class="toggle-label">Order Updates</span>
+              <span class="toggle-desc">Get notified about your order status</span>
+              <input type="checkbox" id="notifyOrders" checked>
+              <span class="toggle-slider"></span>
+            </label>
+            <label class="settings-toggle">
+              <span class="toggle-label">Promotions & Deals</span>
+              <span class="toggle-desc">Receive exclusive offers and discounts</span>
+              <input type="checkbox" id="notifyPromos" checked>
+              <span class="toggle-slider"></span>
+            </label>
+            <label class="settings-toggle">
+              <span class="toggle-label">New Arrivals</span>
+              <span class="toggle-desc">Be the first to know about new products</span>
+              <input type="checkbox" id="notifyArrivals">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+
+        <div class="profile-form-card animate-in" style="animation-delay: 0.15s">
+          <h3 class="card-subtitle">Upgrade to Seller</h3>
+          <p class="upgrade-desc">Start selling products on shopcart. Upgrade your account to access the seller
+            dashboard and product management tools.</p>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="shopName">Shop Name</label>
+              <input type="text" id="shopName" placeholder="e.g. My Awesome Shop">
+            </div>
+            <div class="form-group">
+              <label for="shopPhone">Contact Phone (+91)</label>
+              <input type="tel" id="shopPhone" placeholder="+91 98765 43210">
+            </div>
+            <div class="form-group full-width">
+              <label for="shopDesc">Shop Description</label>
+              <textarea id="shopDesc" rows="2" placeholder="Describe what you sell..."></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn-save btn-upgrade" id="upgradeSellerBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                <polyline points="17 6 23 6 23 12" />
+              </svg>
+              Upgrade to Seller
+            </button>
+          </div>
+        </div>
+
+        <div class="profile-form-card animate-in danger-zone" style="animation-delay: 0.2s">
+          <h3 class="card-subtitle" style="color:#dc2626;">Danger Zone</h3>
+
+          <!-- Default state: show delete button -->
+          <div id="deleteDefault">
+            <p class="upgrade-desc">Permanently delete your account and all associated data. A verification code will be
+              sent to your email, and your account will be scheduled for deletion in 30 days.
+            </p>
+            <div class="form-actions">
+              <button class="btn-danger" id="deleteAccountBtn">Delete Account</button>
+            </div>
+          </div>
+
+          <!-- OTP verification state -->
+          <div id="deleteOtpSection" style="display:none;">
+            <p class="upgrade-desc" style="color:#fbbf24;">Enter the 6-digit verification code sent to your email to
+              confirm account deletion.</p>
+            <div style="max-width:280px; margin:16px 0;">
+              <input type="text" id="deleteOtpInput" placeholder="Enter 6-digit code" maxlength="6" pattern="[0-9]{6}"
+                inputmode="numeric"
+                style="text-align:center; font-size:24px; letter-spacing:12px; font-weight:700; width:100%; padding:14px; background:rgba(220,38,38,0.05); border:1.5px solid rgba(220,38,38,0.3); border-radius:12px; color:#fff; font-family:inherit;">
+            </div>
+            <div class="form-actions" style="gap:10px;">
+              <button class="btn-danger" id="verifyDeleteOtpBtn">Confirm Deletion</button>
+              <button class="btn-cancel" id="cancelDeleteOtpBtn">Cancel</button>
+            </div>
+          </div>
+
+          <!-- Scheduled deletion state -->
+          <div id="deletePendingSection" style="display:none;">
+            <div
+              style="background:rgba(220,38,38,0.08); border:1px solid rgba(220,38,38,0.2); border-radius:12px; padding:16px; margin-bottom:16px;">
+              <p style="color:#f87171; font-weight:600; margin-bottom:6px;">⚠️ Account Deletion Scheduled</p>
+              <p style="color:rgba(255,255,255,0.6); font-size:13px;">Your account will be permanently deleted on
+                <strong id="deletionDateDisplay" style="color:#fbbf24;"></strong>.</p>
+              <p style="color:rgba(255,255,255,0.4); font-size:12px; margin-top:8px;">You can cancel the deletion before
+                this date to keep your account.</p>
+            </div>
+            <div class="form-actions">
+              <button class="btn-save" id="cancelDeletionBtn"
+                style="background:linear-gradient(135deg, #2d7a4a 0%, #63c882 100%);">Cancel Deletion & Restore
+                Account</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <div class="toast-icon" id="toastIcon">✓</div>
+    <span id="toastMsg">Success!</span>
+  </div>
+
+  <script src="profile.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+flask
+flask-cors
+Werkzeug
+requests
+flask-sqlalchemy
+flask-bcrypt
+flask-jwt-extended
+python-dotenv
+PyOTP
+qrcode
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client

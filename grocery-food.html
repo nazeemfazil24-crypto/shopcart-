@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Grocery & Food - ShopHub</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <script>window.categoryPageFilter = "Grocery & Food";</script>
+  <header class="header">
+    <div class="header-top">
+      <div class="logo-section"><div class="logo" id="brand">ShopHub</div></div>
+      <div class="search-section">
+        <input id="search" type="text" placeholder="Search for products, brands and more" class="search-input" />
+        <button id="searchBtn" class="search-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg></button>
+      </div>
+      <div class="header-actions">
+        <div class="account-link" id="accountLink" onclick="handleAccountClick()"><span class="icon">👤</span><span class="text" id="accountText">Login</span></div>
+        <div class="account-link" id="cart-toggle"><span class="icon">🛒</span><span class="text">Cart</span><span class="badge" id="cart-badge">0</span></div>
+      </div>
+    </div>
+    <div class="category-nav">
+      <button class="back-btn" onclick="window.location.href='home.html'">← Back</button>
+      <div class="category-title-header">Grocery & Food</div>
+      <div id="categoryDropdown" class="category-dropdown hidden"></div>
+    </div>
+  </header>
+  <main class="main-container">
+    <section class="products-section category-products-section">
+      <div class="products-main">
+        <div class="products-header">
+          <div id="selectedCategory" class="category-title">Grocery & Food</div>
+        </div>
+        <div id="productGrid" class="product-grid"></div>
+      </div>
+    </section>
+  </main>
+  <div id="productDetailModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content product-detail"><button class="modal-close">✖</button>
+      <div class="detail-container">
+        <div class="detail-image"><div id="detailImagePlaceholder" class="image-placeholder">📷</div><img id="detailImage" src="" alt="Product" class="hidden"></div>
+        <div class="detail-info">
+          <h2 id="detailName"></h2>
+          <div class="rating-section"><span id="detailRating" class="rating-stars"></span><span id="detailReviews" class="reviews-count"></span></div>
+          <div class="price-section"><span id="detailPrice" class="detail-price"></span><span id="detailOrigPrice" class="original-price hidden"></span></div>
+          <p id="detailDescription"></p>
+          <div class="detail-actions"><button id="addToCartBtn" class="btn-primary">Add to Cart</button></div>
+          <div class="delivery-info"><p>✓ Free Delivery on orders above ₹500</p><p>✓ 7-day returns policy</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="cartSidebar" class="cart-sidebar hidden">
+    <div class="cart-header"><h2>Shopping Cart</h2><button id="cartClose" class="close-btn">✖</button></div>
+    <div id="cartList" class="cart-list"></div>
+    <div class="cart-footer"><div class="cart-total"><span>Total:</span><span id="cartTotal">₹0</span></div><button id="checkoutBtn" class="btn-primary" style="width:100%;">Proceed to Checkout</button></div>
+  </div>
+  <audio id="sfxClick" src="assets/sfx/click.mp3" preload="auto"></audio>
+  <audio id="sfxAdd" src="assets/sfx/add.mp3" preload="auto"></audio>
+  <audio id="sfxSuccess" src="assets/sfx/success.mp3" preload="auto"></audio>
+  <!-- Payment modal is dynamically injected by scripts.js -->
+  </div>
+  <script src="scripts.js"></script>
+  <script src="register.js"></script>
+</body>
+</html>

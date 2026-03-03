@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account — ShopHub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            background: #0a0f1a;
+            color: #f0f0f0;
+            overflow: hidden;
+        }
+
+        .auth-left {
+            flex: 1;
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b2838 40%, #162447 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-left::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 200, 130, 0.12) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            border-radius: 50%;
+        }
+
+        .auth-left::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(45, 80, 60, 0.2) 0%, transparent 70%);
+            bottom: -80px;
+            left: -80px;
+            border-radius: 50%;
+        }
+
+        .auth-brand {
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: #fff;
+            z-index: 1;
+            margin-bottom: 16px;
+        }
+
+        .auth-brand span {
+            color: #63c882;
+        }
+
+        .auth-tagline {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.5);
+            z-index: 1;
+            text-align: center;
+            max-width: 300px;
+            line-height: 1.6;
+        }
+
+        .auth-illustration {
+            margin-top: 48px;
+            z-index: 1;
+            font-size: 80px;
+            opacity: 0.7;
+        }
+
+        .auth-right {
+            width: 520px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 48px;
+            background: #0f1726;
+            border-left: 1px solid rgba(255, 255, 255, 0.04);
+            overflow-y: auto;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .auth-card h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .auth-card .subtitle {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.45);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 13px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .field input:focus {
+            outline: none;
+            border-color: #63c882;
+            box-shadow: 0 0 0 3px rgba(99, 200, 130, 0.1);
+            background: rgba(99, 200, 130, 0.03);
+        }
+
+        .field input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #2d7a4a 0%, #63c882 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 8px;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(99, 200, 130, 0.25);
+        }
+
+        .auth-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .auth-footer a {
+            color: #63c882;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .msg {
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            font-size: 14px;
+            display: none;
+            text-align: center;
+        }
+
+        .msg.error {
+            background: rgba(255, 59, 48, 0.1);
+            color: #ff6b6b;
+            display: block;
+            border: 1px solid rgba(255, 59, 48, 0.15);
+        }
+
+        .msg.success {
+            background: rgba(52, 211, 153, 0.1);
+            color: #34d399;
+            display: block;
+            border: 1px solid rgba(52, 211, 153, 0.15);
+        }
+
+        .info-note {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        .info-note span {
+            color: #63c882;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .divider span {
+            margin: 0 10px;
+        }
+
+        .oauth-btn {
+            width: 100%;
+            padding: 13px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .oauth-btn:hover {
+            background: rgba(99, 200, 130, 0.1);
+            border-color: #63c882;
+        }
+
+        .oauth-btn img {
+            width: 18px;
+            height: 18px;
+        }
+
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+                overflow: auto;
+            }
+
+            .auth-left {
+                display: none;
+            }
+
+            .auth-right {
+                width: 100%;
+                min-height: 100vh;
+                border-left: none;
+            }
+
+            .row-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-left">
+        <div class="auth-brand">shop<span>cart</span></div>
+        <p class="auth-tagline">Join thousands of customers shopping premium menswear</p>
+        <div class="auth-illustration">🛍️</div>
+    </div>
+
+    <div class="auth-right">
+        <div class="auth-card">
+            <h1>Create account</h1>
+            <p class="subtitle">Start shopping in seconds — free forever</p>
+
+            <div id="msgBox" class="msg"></div>
+
+            <!-- Registration Form -->
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="field">
+                    <label for="regUsername">Full name</label>
+                    <input id="regUsername" type="text" placeholder="John Doe" required>
+                </div>
+                <div class="field">
+                    <label for="regEmail">Email address</label>
+                    <input id="regEmail" type="email" placeholder="you@example.com" required autocomplete="email">
+                </div>
+                <div class="row-2">
+                    <div class="field">
+                        <label for="regPassword">Password</label>
+                        <input id="regPassword" type="password" placeholder="Min 6 chars" required minlength="6">
+                    </div>
+                    <div class="field">
+                        <label for="regConfirm">Confirm</label>
+                        <input id="regConfirm" type="password" placeholder="Re-enter" required minlength="6">
+                    </div>
+                </div>
+                <p class="info-note">💡 Want to sell products? You can <span>upgrade to seller</span> anytime from your
+                    dashboard after signing up.</p>
+                <button class="auth-btn" type="submit" id="regBtn" style="margin-top:16px;">Create Account</button>
+            </form>
+
+            <!-- OTP Verification Form (hidden by default) -->
+            <div id="otpSection" style="display:none;">
+                <div style="text-align:center; margin-bottom:20px;">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#63c882" stroke-width="1.5"
+                        style="margin-bottom:12px;">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <p style="color:rgba(255,255,255,0.5); font-size:13px;">We sent a 6-digit code to <strong
+                            id="otpEmailDisplay" style="color:#63c882;"></strong></p>
+                </div>
+                <div class="field">
+                    <label for="otpInput">VERIFICATION CODE</label>
+                    <input id="otpInput" type="text" placeholder="Enter 6-digit code" maxlength="6" pattern="[0-9]{6}"
+                        inputmode="numeric"
+                        style="text-align:center; font-size:24px; letter-spacing:12px; font-weight:700;">
+                </div>
+                <button class="auth-btn" type="button" id="verifyOtpBtn" onclick="handleVerifyOtp()">Verify
+                    Email</button>
+                <div style="text-align:center; margin-top:16px;">
+                    <button type="button"
+                        style="background:rgba(99,200,130,0.1); color:#63c882; border:1px solid rgba(99,200,130,0.3); padding:8px 16px; border-radius:8px; cursor:pointer; font-size:13px;"
+                        onclick="handleResendOtp()">Resend Code</button>
+                </div>
+            </div>
+
+
+
+            <div class="auth-footer">
+                Already have an account? <a href="login.html">Sign in</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let pendingEmail = '';
+
+        function showMsg(message, type) {
+            const el = document.getElementById('msgBox');
+            el.innerHTML = message;
+            el.className = 'msg ' + type;
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            const username = document.getElementById('regUsername').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const confirm = document.getElementById('regConfirm').value;
+            const btn = document.getElementById('regBtn');
+
+            showMsg('', '');
+            if (password !== confirm) { showMsg('Passwords do not match', 'error'); return; }
+            if (password.length < 6) { showMsg('Password must be at least 6 characters', 'error'); return; }
+
+            btn.disabled = true;
+            btn.textContent = 'Creating...';
+
+            try {
+                const resp = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
+                const data = await resp.json();
+
+                if (resp.ok && data.success) {
+                    pendingEmail = data.email || email;
+                    // Show OTP verification form
+                    document.getElementById('registerForm').style.display = 'none';
+                    document.getElementById('otpSection').style.display = 'block';
+                    document.getElementById('otpEmailDisplay').textContent = pendingEmail;
+                    // Show OTP code directly on the page
+                    if (data.otp_code) {
+                        showMsg('✓ Account created! Your verification code is: <strong style="font-size:20px;letter-spacing:4px;color:#63c882;">' + data.otp_code + '</strong>', 'success');
+                    } else {
+                        showMsg('✓ Account created! Check your email for the verification code.', 'success');
+                    }
+                } else {
+                    showMsg(data.error || 'Registration failed', 'error');
+                }
+            } catch (err) {
+                showMsg('Network error. Is the server running?', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Create Account';
+            }
+        }
+
+        async function handleVerifyOtp() {
+            const otp = document.getElementById('otpInput').value.trim();
+            const btn = document.getElementById('verifyOtpBtn');
+
+            if (!otp || otp.length !== 6) {
+                showMsg('Please enter the 6-digit code', 'error');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Verifying...';
+
+            try {
+                const resp = await fetch('/api/verify-registration-otp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: pendingEmail, otp })
+                });
+                const data = await resp.json();
+
+                if (resp.ok && data.success) {
+                    showMsg('✓ Email verified! Redirecting to login...', 'success');
+                    setTimeout(() => { window.location.href = 'login.html'; }, 1500);
+                } else {
+                    showMsg(data.error || 'Verification failed', 'error');
+                }
+            } catch (err) {
+                showMsg('Network error. Please try again.', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Verify Email';
+            }
+        }
+
+        async function handleResendOtp() {
+            if (!pendingEmail) {
+                showMsg('No email to resend to', 'error');
+                return;
+            }
+
+            try {
+                const resp = await fetch('/api/resend-verification-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: pendingEmail })
+                });
+                const data = await resp.json();
+
+                if (resp.ok && data.success) {
+                    if (data.otp_code) {
+                        showMsg('✓ New verification code: <strong style="font-size:20px;letter-spacing:4px;color:#63c882;">' + data.otp_code + '</strong>', 'success');
+                    } else {
+                        showMsg('✓ New verification code sent! Check your inbox.', 'success');
+                    }
+                } else {
+                    showMsg(data.error || 'Failed to resend code', 'error');
+                }
+            } catch (err) {
+                showMsg('Network error. Please try again.', 'error');
+            }
+        }
+    </script>
+</body>
+
+</html>
